@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="760.0" prefWidth="1200.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.licensify.app.controller.AdminDashboardController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         
+         <!-- Left Sidebar -->
+         <left>
+            <VBox prefWidth="250.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+               <children>
+                  <!-- Logo Area -->
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="12.0" style="-fx-border-color: transparent transparent rgba(255,255,255,0.05) transparent; -fx-border-width: 1px;">
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: linear-gradient(to right, #3b82f6, #8b5cf6); -fx-background-radius: 8px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;" text="A" />
+                        <VBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label style="-fx-font-size: 16px; -fx-font-weight: 800; -fx-text-fill: white;" text="Licensify" />
+                              <Label style="-fx-font-size: 10px; -fx-text-fill: #3b82f6; -fx-font-weight: 700;" text="ADMIN CENTER" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  
+                  <!-- Navigation Links -->
+                  <VBox spacing="4.0" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <Label style="-fx-text-fill: #64748b; -fx-font-size: 11px; -fx-font-weight: 700; -fx-padding: 0 0 8px 12px;" text="PLATFORM" />
+                        
+                        <Button fx:id="btnNavOverview" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showOverviewPanel" styleClass="nav-item, nav-active" text="Analytics">
+                            <graphic><FontIcon iconLiteral="fas-chart-pie" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button fx:id="btnNavUsers" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showUsersPanel" styleClass="nav-item" text="User Management">
+                            <graphic><FontIcon iconLiteral="fas-users" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button fx:id="btnNavMainLicense" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMainLicensePanel" styleClass="nav-item" text="License Registry">
+                            <graphic><FontIcon iconLiteral="fas-key" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button fx:id="btnNavFeatureLicense" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showFeaturePanel" styleClass="nav-item" text="Feature Limits">
+                            <graphic><FontIcon iconLiteral="fas-cubes" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button fx:id="btnNavHardware" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHardwarePanel" styleClass="nav-item" text="Hardware IDs">
+                            <graphic><FontIcon iconLiteral="fas-microchip" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button fx:id="btnNavLicenseRequests" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showLicenseRequestsPanel" styleClass="nav-item" text="Requests Inbox">
+                            <graphic><FontIcon iconLiteral="fas-inbox" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        
+                        <Region VBox.vgrow="ALWAYS" />
+                        
+                        <Label style="-fx-text-fill: #64748b; -fx-font-size: 11px; -fx-font-weight: 700; -fx-padding: 0 0 8px 12px;" text="SYSTEM" />
+                        <Button fx:id="btnNavAuditLogs" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAuditLogsPanel" styleClass="nav-item" text="Audit Logs">
+                            <graphic><FontIcon iconLiteral="fas-clipboard-list" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-item" text="Settings">
+                            <graphic><FontIcon iconLiteral="fas-cog" iconSize="16" style="-fx-translate-x: -10px;" /></graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </left>
+         
+         <center>
+            <BorderPane BorderPane.alignment="CENTER">
+               <!-- Top Navbar -->
+               <top>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="15.0" styleClass="navbar" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                     <children>
+                        <!-- Search Bar -->
+                        <HBox alignment="CENTER_LEFT" styleClass="search-bar">
+                           <children>
+                              <FontIcon iconLiteral="fas-search" iconSize="14" style="-fx-text-fill: #64748b;" />
+                              <TextField promptText="Search users, licenses, hardware..." style="-fx-background-color: transparent; -fx-text-fill: white;" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        
+                        <Region HBox.hgrow="ALWAYS" />
+                        
+                        <!-- Notifications -->
+                        <Button mnemonicParsing="false" styleClass="btn-icon">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-bell" iconSize="18" />
+                           </graphic>
+                        </Button>
+                        
+                        <VBox prefWidth="1.0" style="-fx-background-color: rgba(255,255,255,0.1);" />
+                        
+                        <!-- User Profile -->
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT">
+                                 <children>
+                                    <Label fx:id="adminWelcomeLabel" style="-fx-font-weight: 600; -fx-text-fill: white;" text="System Admin" />
+                                    <Label style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;" text="Superuser" />
+                                 </children>
+                              </VBox>
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #3b82f6; -fx-background-radius: 50%; -fx-text-fill: white; -fx-font-weight: bold;" text="AD" />
+                           </children>
+                        </HBox>
+                        
+                        <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="btn-secondary" text="Logout">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-sign-out-alt" iconSize="12" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </top>
+               
+               <center>
+                  <StackPane fx:id="centerStackPane" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                     <children>
+                        
+                        <!-- 1. ANALYTICS DASHBOARD -->
+                        <ScrollPane fx:id="panelOverview" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                           <content>
+                              <VBox spacing="25.0">
+                                 <children>
+                                    <Label styleClass="title-label" text="Platform Overview" />
+                                    
+                                    <!-- KPI Cards Row -->
+                                    <HBox spacing="15.0">
+                                       <children>
+                                          <!-- Revenue -->
+                                          <VBox spacing="10.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <VBox alignment="CENTER" styleClass="stat-icon-wrapper, stat-icon-primary">
+                                                         <children><FontIcon iconLiteral="fas-rupee-sign" iconSize="20" /></children>
+                                                      </VBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label style="-fx-text-fill: #94a3b8; -fx-font-weight: 600; -fx-font-size: 13px;" text="MRR" />
+                                                            <Label fx:id="lblStatRevenue" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;" text="₹45,230" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #10b981; -fx-font-size: 12px; -fx-font-weight: 600;" text="↑ 12% from last month" />
+                                             </children>
+                                          </VBox>
+                                          
+                                          <!-- Total Licenses -->
+                                          <VBox spacing="10.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <VBox alignment="CENTER" styleClass="stat-icon-wrapper, stat-icon-success">
+                                                         <children><FontIcon iconLiteral="fas-key" iconSize="20" /></children>
+                                                      </VBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label style="-fx-text-fill: #94a3b8; -fx-font-weight: 600; -fx-font-size: 13px;" text="Total Licenses" />
+                                                            <Label fx:id="totalLicensesLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;" text="0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #10b981; -fx-font-size: 12px; -fx-font-weight: 600;" text="↑ 4 new this week" />
+                                             </children>
+                                          </VBox>
+                                          
+                                          <!-- Active Licenses -->
+                                          <VBox spacing="10.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <VBox alignment="CENTER" styleClass="stat-icon-wrapper, stat-icon-warning">
+                                                         <children><FontIcon iconLiteral="fas-check-circle" iconSize="20" /></children>
+                                                      </VBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label style="-fx-text-fill: #94a3b8; -fx-font-weight: 600; -fx-font-size: 13px;" text="Active Licenses" />
+                                                            <Label fx:id="activeLicensesLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;" text="0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #64748b; -fx-font-size: 12px; -fx-font-weight: 600;" text="Current active users" />
+                                             </children>
+                                          </VBox>
+                                          
+                                          <!-- Expired/Suspended -->
+                                          <VBox spacing="10.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <VBox alignment="CENTER" styleClass="stat-icon-wrapper, stat-icon-danger">
+                                                         <children><FontIcon iconLiteral="fas-times-circle" iconSize="20" /></children>
+                                                      </VBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label style="-fx-text-fill: #94a3b8; -fx-font-weight: 600; -fx-font-size: 13px;" text="Inactive/Expired" />
+                                                            <Label fx:id="inactiveLicensesLabel" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;" text="0" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #ef4444; -fx-font-size: 12px; -fx-font-weight: 600;" text="Requires attention" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    
+                                    <!-- Charts Row -->
+                                    <HBox spacing="15.0">
+                                       <children>
+                                          <!-- Revenue Line Chart -->
+                                          <VBox prefHeight="350.0" spacing="10.0" styleClass="saas-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label style="-fx-font-weight: 600; -fx-font-size: 14px; -fx-text-fill: white;" text="Revenue Growth" />
+                                                <LineChart fx:id="revenueChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </LineChart>
+                                             </children>
+                                          </VBox>
+                                          
+                                          <!-- License Types Pie Chart -->
+                                          <VBox prefHeight="350.0" prefWidth="400.0" spacing="10.0" styleClass="saas-card">
+                                             <children>
+                                                <Label style="-fx-font-weight: 600; -fx-font-size: 14px; -fx-text-fill: white;" text="License Types" />
+                                                <PieChart fx:id="licensePieChart" legendSide="BOTTOM" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                        
+                        <!-- 2. USER MANAGEMENT -->
+                        <VBox fx:id="panelUsers" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="User Management" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                       <children>
+                                          <TextField prefWidth="250.0" promptText="Search users by name, email..." styleClass="text-field" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddUser" styleClass="btn-primary" text="+ Add New User" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                                       <columns>
+                                          <TableColumn fx:id="colUserId" prefWidth="60.0" text="ID" />
+                                          <TableColumn fx:id="colUsername" prefWidth="200.0" text="USERNAME" />
+                                          <TableColumn fx:id="colEmail" prefWidth="250.0" text="EMAIL" />
+                                          <TableColumn fx:id="colUserRole" prefWidth="120.0" text="ROLE" />
+                                          <TableColumn fx:id="colUserStatus" prefWidth="120.0" text="STATUS" />
+                                          <TableColumn fx:id="colUserCreated" prefWidth="150.0" text="REGISTERED" />
+                                          <TableColumn fx:id="colUserActions" prefWidth="150.0" text="ACTIONS" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                        <!-- 3. LICENSE REGISTRY -->
+                        <VBox fx:id="panelMainLicense" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="License Registry" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                       <children>
+                                          <TextField fx:id="searchField" prefWidth="300.0" promptText="Search licenses by Key or Name..." styleClass="text-field" />
+                                          <ComboBox fx:id="statusFilterComboBox" prefWidth="150.0" promptText="Filter Status" styleClass="combo-box" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Label fx:id="lblRecordCount" style="-fx-text-fill: #94a3b8; -fx-font-weight: 600;" text="0 records" />
+                                          <Button mnemonicParsing="false" onAction="#handleMockDownload" styleClass="btn-secondary" text="Export CSV">
+                                             <graphic><FontIcon iconLiteral="fas-file-csv" /></graphic>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#handleCreateLicense" styleClass="btn-primary" text="+ Issue License" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="licenseTable" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="colKey" prefWidth="100.0" text="KEY ID" />
+                                        <TableColumn fx:id="colLicUsername" prefWidth="100.0" text="USERNAME" />
+                                        <TableColumn fx:id="colName" prefWidth="120.0" text="PRODUCT" />
+                                        <TableColumn fx:id="colType" prefWidth="100.0" text="TYPE" />
+                                        <TableColumn fx:id="colDimension" prefWidth="80.0" text="3D/2D" />
+                                        <TableColumn fx:id="colCost" prefWidth="70.0" text="COST" />
+                                        <TableColumn fx:id="colStatus" prefWidth="80.0" text="STATUS" />
+                                        <TableColumn fx:id="colFeatures" prefWidth="120.0" text="FEATURES" />
+                                        <TableColumn fx:id="colIssueDate" prefWidth="100.0" text="ISSUE DATE" />
+                                        <TableColumn fx:id="colExpiryDate" prefWidth="100.0" text="EXPIRY DATE" />
+                                        <TableColumn fx:id="colLicActions" prefWidth="140.0" text="ACTIONS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- 4. FEATURE LICENSE -->
+                        <VBox fx:id="panelFeatureLicense" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="Feature Licenses" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                       <children>
+                                          <Label style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;" text="Target License:" />
+                                          <ComboBox fx:id="featureLicenseComboBox" prefWidth="300.0" styleClass="combo-box" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddFeature" styleClass="btn-primary" text="+ Add Feature Toggle" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="featureTable" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="colFeatId" prefWidth="100.0" text="ID" />
+                                        <TableColumn fx:id="colFeatName" prefWidth="180.0" text="FEATURE NAME" />
+                                        <TableColumn fx:id="colFeatStatus" prefWidth="100.0" text="STATUS" />
+                                        <TableColumn fx:id="colFeatType" prefWidth="120.0" text="TYPE" />
+                                        <TableColumn fx:id="colFeatExpiry" prefWidth="120.0" text="EXPIRY" />
+                                        <TableColumn fx:id="colFeatActions" prefWidth="150.0" text="ACTIONS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- 5. HARDWARE IDS -->
+                        <VBox fx:id="panelHardware" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="Hardware Verification" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                        <Label style="-fx-text-fill: #94a3b8;" text="Hardware binding locks a license to a specific physical machine. This view is read-only from the client." />
+                                    </HBox>
+                                    
+                                    <HBox spacing="15.0">
+                                       <children>
+                                          <!-- CPU -->
+                                          <VBox alignment="CENTER" prefHeight="160.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.03); -fx-background-radius: 12px; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 12px;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <FontIcon iconLiteral="fas-microchip" iconSize="36" style="-fx-text-fill: #3b82f6;" />
+                                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="CPU Fingerprint" />
+                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #10b981;" text="✓ Verified Match" />
+                                             </children>
+                                          </VBox>
+                                          <!-- Motherboard -->
+                                          <VBox alignment="CENTER" prefHeight="160.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.03); -fx-background-radius: 12px; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 12px;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <FontIcon iconLiteral="fas-server" iconSize="36" style="-fx-text-fill: #a855f7;" />
+                                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Baseboard ID" />
+                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #10b981;" text="✓ Verified Match" />
+                                             </children>
+                                          </VBox>
+                                          <!-- MAC Address -->
+                                          <VBox alignment="CENTER" prefHeight="160.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.03); -fx-background-radius: 12px; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 12px;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <FontIcon iconLiteral="fas-network-wired" iconSize="36" style="-fx-text-fill: #f59e0b;" />
+                                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="MAC Address" />
+                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #f59e0b;" text="⚠ Requires Re-verification" />
+                                             </children>
+                                          </VBox>
+                                          <!-- Disk -->
+                                          <VBox alignment="CENTER" prefHeight="160.0" spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.03); -fx-background-radius: 12px; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 12px;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <FontIcon iconLiteral="fas-hdd" iconSize="36" style="-fx-text-fill: #ef4444;" />
+                                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Disk Serial" />
+                                                <Label style="-fx-font-size: 11px; -fx-text-fill: #ef4444;" text="✖ Mismatch Detected" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 20px 0 0 0;" text="Recent Hardware Verification Logs" />
+                                    <TableView VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn prefWidth="150.0" text="TIMESTAMP" />
+                                        <TableColumn prefWidth="120.0" text="COMPONENT" />
+                                        <TableColumn prefWidth="250.0" text="DETECTED HASH" />
+                                        <TableColumn prefWidth="100.0" text="STATUS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- 6. LICENSE REQUESTS -->
+                        <VBox fx:id="panelLicenseRequests" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="Approval Requests Inbox" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TableView fx:id="licenseRequestsTable" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="colReqId" prefWidth="60.0" text="REQ ID" />
+                                        <TableColumn fx:id="colReqUserId" prefWidth="100.0" text="USER ID" />
+                                        <TableColumn fx:id="colReqType" prefWidth="100.0" text="REQ TYPE" />
+                                        <TableColumn fx:id="colReqDuration" prefWidth="100.0" text="DURATION" />
+                                        <TableColumn fx:id="colReqDate" prefWidth="130.0" text="SUBMITTED" />
+                                        <TableColumn fx:id="colReqStatus" prefWidth="100.0" text="STATUS" />
+                                        <TableColumn fx:id="colReqActions" prefWidth="150.0" text="ACTIONS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- 7. AUDIT LOGS -->
+                        <VBox fx:id="panelAuditLogs" spacing="20.0" visible="false">
+                           <children>
+                              <Label styleClass="title-label" text="System Audit Logs" />
+                              <VBox spacing="15.0" styleClass="saas-card" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                       <children>
+                                          <TextField prefWidth="300.0" promptText="Search logs..." styleClass="text-field" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" styleClass="btn-secondary" text="Download Logs">
+                                             <graphic><FontIcon iconLiteral="fas-download" /></graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="auditTable" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="colTxId" prefWidth="60.0" text="TX ID" />
+                                        <TableColumn fx:id="colTxDate" prefWidth="150.0" text="TIMESTAMP" />
+                                        <TableColumn fx:id="colTxKey" prefWidth="100.0" text="ACTOR / KEY" />
+                                        <TableColumn fx:id="colTxAction" prefWidth="150.0" text="ACTION" />
+                                        <TableColumn fx:id="colTxDetails" prefWidth="300.0" text="DETAILS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                     </children>
+                  </StackPane>
+               </center>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

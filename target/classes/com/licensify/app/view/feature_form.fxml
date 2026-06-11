@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="480.0" prefWidth="450.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.licensify.app.controller.FeatureFormController">
+   <children>
+      <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+         <children>
+            <!-- Form Title -->
+            <VBox alignment="CENTER" spacing="5.0" style="-fx-padding: 0 0 10px 0;">
+               <children>
+                  <Label fx:id="formTitleLabel" styleClass="header-text" text="Add New Feature" style="-fx-font-size: 20px;" />
+               </children>
+            </VBox>
+            
+            <!-- Fields Glass Pane -->
+            <VBox spacing="15.0" styleClass="glass-pane" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+               </padding>
+               <children>
+                  <!-- Feature Name -->
+                  <VBox spacing="6.0">
+                     <children>
+                        <Label styleClass="subtitle-label" text="Feature Name:" />
+                        <TextField fx:id="nameField" promptText="e.g. Dual Energy" styleClass="text-field" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Type -->
+                  <VBox spacing="6.0">
+                     <children>
+                        <Label styleClass="subtitle-label" text="Type:" />
+                        <ComboBox fx:id="typeComboBox" maxWidth="1.7976931348623157E308" promptText="Select Type" styleClass="combo-box" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Expiry Date -->
+                  <VBox spacing="6.0">
+                     <children>
+                        <Label fx:id="lblExpiryDateTitle" styleClass="subtitle-label" text="Expiry Date:" />
+                        <DatePicker fx:id="expiryDatePicker" maxWidth="1.7976931348623157E308" styleClass="date-picker" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Status -->
+                  <VBox spacing="6.0">
+                     <children>
+                        <Label styleClass="subtitle-label" text="Status:" />
+                        <ComboBox fx:id="statusComboBox" maxWidth="1.7976931348623157E308" promptText="Select Status" styleClass="combo-box" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            
+            <!-- Buttons HBox -->
+            <HBox alignment="CENTER_RIGHT" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="btn-secondary" text="Cancel" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSave" styleClass="btn-primary" text="Save Feature" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

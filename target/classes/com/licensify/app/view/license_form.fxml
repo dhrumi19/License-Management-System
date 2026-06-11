@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="540.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.licensify.app.controller.LicenseFormController">
+   <children>
+      <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <!-- Form Title -->
+            <VBox spacing="5.0">
+               <children>
+                  <Label fx:id="formTitleLabel" styleClass="header-text" text="License Form" />
+                  <Label styleClass="subtitle-label" text="Configure application license properties and attributes" />
+               </children>
+            </VBox>
+            
+            <!-- Form Fields Grid -->
+            <VBox spacing="12.0" styleClass="glass-pane" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+               </padding>
+               <children>
+                  <!-- Row 1: Name & User -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="License Name" />
+                              <TextField fx:id="nameField" promptText="e.g. Primary License" styleClass="text-field" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="Assign to User" />
+                              <ComboBox fx:id="userComboBox" maxWidth="1.7976931348623157E308" promptText="Select a User" styleClass="combo-box" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  
+                  <!-- Row 2: License Key -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="subtitle-label" text="License Key" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField fx:id="keyField" editable="false" promptText="LCS-XXXX-XXXX-XXXX-XXXX" styleClass="text-field" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="generateBtn" mnemonicParsing="false" onAction="#handleGenerateKey" styleClass="btn-success" text="Generate" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Row 3: Type & Dimension -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="License Type" />
+                              <ComboBox fx:id="typeComboBox" maxWidth="1.7976931348623157E308" promptText="Select Type" styleClass="combo-box" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="3D/2D Capability" />
+                              <ComboBox fx:id="dimensionComboBox" maxWidth="1.7976931348623157E308" promptText="Select Dimension" styleClass="combo-box" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+                  <!-- Row 4: Cost & Status -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="Cost (₹ INR)" />
+                              <TextField fx:id="costField" promptText="e.g. 499.00" styleClass="text-field" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="License Status" />
+                              <ComboBox fx:id="statusComboBox" maxWidth="1.7976931348623157E308" promptText="Select Status" styleClass="combo-box" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  
+                  <!-- Row 5: Issue & Expiry Dates -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="Issue Date" />
+                              <DatePicker fx:id="issueDatePicker" maxWidth="1.7976931348623157E308" styleClass="date-picker" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="lblExpiryDateTitle" styleClass="subtitle-label" text="Expiry Date" />
+                              <DatePicker fx:id="expiryDatePicker" maxWidth="1.7976931348623157E308" styleClass="date-picker" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  
+                  <!-- Row 6: Features -->
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="Enable Premium Features" />
+                              <CheckBox fx:id="chkExport" mnemonicParsing="false" styleClass="check-box" text="Premium Export Reports (Excel/PDF)" />
+                              <CheckBox fx:id="chkCharts" mnemonicParsing="false" styleClass="check-box" text="Advanced Interactive Charts" />
+                              <CheckBox fx:id="chkApi" mnemonicParsing="false" styleClass="check-box" text="Developer API Integration" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="subtitle-label" text="Select Module Feature" />
+                              <ComboBox fx:id="featureComboBox" maxWidth="1.7976931348623157E308" promptText="Select Feature" styleClass="combo-box" />
+                              <Label styleClass="subtitle-label" text="Bind Hardware" />
+                              <ComboBox fx:id="BindHardwareComboBox" maxWidth="1.7976931348623157E308" promptText="Select Hardware" styleClass="combo-box" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            
+            <!-- Actions -->
+            <HBox alignment="CENTER_RIGHT" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="btn-secondary" text="Cancel" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSave" styleClass="btn-primary" text="Save License" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
